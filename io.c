@@ -173,14 +173,27 @@ bitString[0], expString, manString);
 			fracNum += 1/pow(2,i+1);
 		}
 	}
-
+	
 	//printf("fracNum: %lf\n", fracNum);
 
 	char* ptr;
 	unsigned long long  int wholeInt = 0;
+	char wholeSeg[256];
+
+	for (int i = 0; i < 128; i++) {
+		wholeSeg[i] = '0';
+	}
+	wholeSeg[128] = '\0';
+
+	int strLength = strlen(wholeSeg);
+	printf("The number of zeroes is %d and the string is \n %s \n\n", strLength, wholeSeg);	
+
 	
-	wholeInt = strtoull(whole, &ptr, 2);
-	double finalNum = fracNum + wholeInt;
+	strcat(wholeSeg, whole);
+	strLength = strlen(wholeSeg);
+
+	printf("The whole number string is now %s, and the length is %d", wholeSeg, strLength);
+wholeInt = strtoull(whole, &ptr, 2); double finalNum = fracNum + wholeInt;
 	if (isNeg) {
 		finalNum *= -1;
 	}
