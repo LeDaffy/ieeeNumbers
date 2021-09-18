@@ -58,7 +58,7 @@ input value: %llu\n", argv[1], input);
 
 
 
-printf("\nInput Binary Breakdown\n\
+printf("\n1) Input Binary Breakdown\n\
 ___________________________________________\n\
 |%c       |%s|%s|\n\
 |Negative|Exponent|Mantissa               |\n\
@@ -67,7 +67,7 @@ bitString[0], expString, manString);
 
 
 
-	printf("Properties:\n");
+	printf("2) Properties:\n");
 	//check if negative
 	bool isNeg;
 	if (bitString[0] == '1') {
@@ -94,6 +94,7 @@ bitString[0], expString, manString);
 	 * 128 leading before binary point
 	 * 128 after binary point
 	 */
+	printf("3a) Add Padding\n");
 	char leadingManString[258];
 	leadingManString[257] = '\0';
 	for (int i = 0; i < 257; i++) {
@@ -113,20 +114,31 @@ bitString[0], expString, manString);
 
 	char finalString[258];
 	finalString[257] = '\0';
+	finalString[0] = '0';
 	unsigned int binaryPoint = 128+trueExp;
-
+	//printf("\nBinary Point: %u\n", binaryPoint);
+	bool afterBinaryPoint = 0;
+	bool placedBinaryPoint = 0;
 	for (int i = 0; i < 257; i++) {
+		if (i == 128) afterBinaryPoint = 1;
 		if (i == binaryPoint) {
 			finalString[i] = '.';
-		} else if (i < binaryPoint && leadingManString[i] != '.') {
-			finalString[i] = leadingManString[i];
+			placedBinaryPoint = 1;
 		} else {
-			finalString[i] = '0';
+			if (i < 128 && !placedBinaryPoint)
+				finalString[i] = leadingManString[i];
+			else if (i < 128 && placedBinaryPoint) 
+				finalString[i] = leadingManString[i-1];
+			else if (i > 128 && placedBinaryPoint)
+				finalString[i] = leadingManString[i];
+			else
+				finalString[i] = leadingManString[i+1];
 		}
 	}
 
-	printf("\n\nFinal String\n\n %s\n", finalString);
+	printf("\n3b) Move Binary Point\n\n%s\n", finalString);
 
-
+	int asdf = strlen(finalString);
+	printf("Strlen %d\n", asdf);
 	return 0;
 }
