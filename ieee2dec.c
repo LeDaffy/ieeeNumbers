@@ -210,7 +210,6 @@ bitString[0], expString, manString);
 
 	double finalAnswer = (double)wholeNumber + fracNumber;
 	if (isNeg) finalAnswer *= -1;
-<<<<<<< HEAD
 	if (!scientificNotation){
 		printf("\nConverted Output:\n%.24lf\n", finalAnswer);
 	} else {
@@ -218,8 +217,5 @@ bitString[0], expString, manString);
 	}
 	
 	
-=======
-	printf("\nConverted Output:\n%.24lf\n", finalAnswer);
->>>>>>> 2c5d1adffa25a822e70e933579b57f47dad6a676
 	return 0;
 }
