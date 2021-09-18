@@ -181,7 +181,7 @@ bitString[0], expString, manString);
 	if (!supressPrint) printf("4b) Separate Fractional Component\n%s\n", fracString);
 
 	unsigned long long int wholeNumber = 0;
-	long double fracNumber = 0.0;
+	double fracNumber = 0.0;
 	unsigned int wholeLength, fracLength;
 	wholeLength = strlen(wholeString);
 	fracLength = strlen(fracString);
@@ -190,18 +190,18 @@ bitString[0], expString, manString);
 	
 	for (int i = 0; i < fracLength; i++) {
 		if (fracString[i] == '1') {
-			fracNumber += (long double)1.0/((long double)(pow(2,i+1)));
+			fracNumber += (double)1.0/((double)(pow(2,i+1)));
 		} else {
 			continue;
 		}
 	}
 
 	if (!supressPrint) printf("\n5a) Comput Whole Component\n%llu\n", wholeNumber);
-	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128Lf\n", fracNumber);
+	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128lf\n", fracNumber);
 	
 
-	long double finalAnswer = (long double)wholeNumber + fracNumber;
+	double finalAnswer = (double)wholeNumber + fracNumber;
 	if (isNeg) finalAnswer *= -1;
-	printf("\nConverted Output:\n%.24Lf\n", finalAnswer);
+	printf("\nConverted Output:\n%.24lf\n", finalAnswer);
 	return 0;
 }
