@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
 	 *INPUT: Read in first command line argument
 	 */
 	bool supressPrint = 1;
+	bool scientificNotation = 0;
 	unsigned long long int input= 0;
 	if (argv[1][1] == 'x' || argv[1][1] == 'X') {
 		argv[1][1] = '0';   
@@ -21,14 +22,21 @@ int main(int argc, char** argv) {
 	} else {
 		input = strtoll(argv[1], NULL, 10);
 	}
-	if (argc > 2) {
-		if (!strcmp(argv[2], "-p") ||
-			!strcmp(argv[2], "-P") ||
-			!strcmp(argv[2], "-print") ||
-			!strcmp(argv[2], "-Print")) {
-			supressPrint = 0;
-		}
 
+	
+	if (argc > 2) {
+		for (int i = 2; i < argc; i++) {
+			if (!strcmp(argv[i], "-p") ||
+			!strcmp(argv[i], "-P") ||
+			!strcmp(argv[i], "-print") ||
+			!strcmp(argv[i], "-Print")) {
+				supressPrint = 0;
+			} else if 
+			(!strcmp(argv[i], "-e") ||
+			!strcmp(argv[i], "-E")){
+				scientificNotation = 1;
+			}
+		}
 	}
 	
 	if (!supressPrint) printf("input string: %s\n\
@@ -181,7 +189,7 @@ bitString[0], expString, manString);
 	if (!supressPrint) printf("4b) Separate Fractional Component\n%s\n", fracString);
 
 	unsigned long long int wholeNumber = 0;
-	long double fracNumber = 0.0;
+	double fracNumber = 0.0;
 	unsigned int wholeLength, fracLength;
 	wholeLength = strlen(wholeString);
 	fracLength = strlen(fracString);
@@ -190,18 +198,24 @@ bitString[0], expString, manString);
 	
 	for (int i = 0; i < fracLength; i++) {
 		if (fracString[i] == '1') {
-			fracNumber += (long double)1.0/((long double)(pow(2,i+1)));
+			fracNumber += (double)1.0/((double)(pow(2,i+1)));
 		} else {
 			continue;
 		}
 	}
 
 	if (!supressPrint) printf("\n5a) Comput Whole Component\n%llu\n", wholeNumber);
-	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128Lf\n", fracNumber);
+	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128lf\n", fracNumber);
 	
 
-	long double finalAnswer = (long double)wholeNumber + fracNumber;
+	double finalAnswer = (double)wholeNumber + fracNumber;
 	if (isNeg) finalAnswer *= -1;
-	printf("\nConverted Output:\n%.24Lf\n", finalAnswer);
+	if (!scientificNotation){
+		printf("\nConverted Output:\n%.24lf\n", finalAnswer);
+	} else {
+		printf("\nConverted Output:\n%e\n", finalAnswer);
+	}
+	
+	
 	return 0;
 }
