@@ -111,7 +111,9 @@ bitString[0], expString, manString);
 		printf("%c", leadingManString[i]);
 	}
 	
-
+	/*
+	 * Move the binary point
+	 */
 	char finalString[258];
 	finalString[257] = '\0';
 	finalString[0] = '0';
@@ -136,9 +138,55 @@ bitString[0], expString, manString);
 		}
 	}
 
-	printf("\n3b) Move Binary Point\n\n%s\n", finalString);
+	printf("\n3b) Move Binary Point\n%s\n\n", finalString);
 
-	int asdf = strlen(finalString);
-	printf("Strlen %d\n", asdf);
+
+	/*
+	 * Convert to two strings
+	 * One with the whole number component
+	 * One with the fractional component
+	 */
+	
+	char wholeString[258];
+	char fracString[258];
+	wholeString[257] = '\0';
+	fracString[257] = '\0';
+	afterBinaryPoint = 0;
+	int locBinaryPoint;
+
+	for (int i = 0; i < 257; i++) {
+		if (finalString[i] == '.') {
+			afterBinaryPoint = 1;
+			locBinaryPoint = i;
+		}
+		if (!afterBinaryPoint) {
+			wholeString[i] = finalString[i];
+			wholeString[i+1] = '\0';
+		}
+		else {
+			fracString[i-locBinaryPoint] = finalString[i+1];
+		}
+	}
+
+	printf("4a) Separate Whole Component\n%s\n", wholeString);
+	printf("4b) Separate Fractional Component\n%s\n", fracString);
+
+	unsigned long long int wholeNumber;
+	long double fracNumber;
+	unsigned int wholeLength, fracLength;
+	wholeLength = strlen(wholeString);
+	fracLength = strlen(fracString);
+
+
+	
+	for (int i = 0; i < fracLength; i++) {
+		if (fracString[i] == '1') {
+			fracNumber += (long double)1.0/((long double)(pow(2,i+1)));
+		} else {
+			continue;
+		}
+	}
+	printf("\n5b) Compute Fractional Component \n%.128Lf\n", fracNumber);
+
 	return 0;
 }
