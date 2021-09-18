@@ -14,7 +14,7 @@ Options:
 
 `-print`: Print conversion steps
 
-`-e`: Output as scientific notation
+`-e`: Output as scientific notation, useful for small numbers
 
 ## Compiling
 Clang:
