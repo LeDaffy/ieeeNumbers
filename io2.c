@@ -3,13 +3,14 @@
 #include <math.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include <assert.h>
 
 
 int main(int argc, char** argv) {
 	/*
 	 *INPUT: Read in first command line argument
 	 */
+	bool supressPrint = 1;
 	unsigned long long int input= 0;
 	if (argv[1][1] == 'x' || argv[1][1] == 'X') {
 		argv[1][1] = '0';   
@@ -20,14 +21,23 @@ int main(int argc, char** argv) {
 	} else {
 		input = strtoll(argv[1], NULL, 10);
 	}
-	 
-	printf("input string: %s\n\
+	if (argc > 2) {
+		if (!strcmp(argv[2], "-p") ||
+			!strcmp(argv[2], "-P") ||
+			!strcmp(argv[2], "-print") ||
+			!strcmp(argv[2], "-Print")) {
+			supressPrint = 0;
+		}
+
+	}
+	
+	if (!supressPrint) printf("input string: %s\n\
 input value: %llu\n", argv[1], input);
 
 
 	/*
 	 * Isolate Negative, Exponent, and Mantissa
-	 */
+	 */if (!supressPrint) 
 	char bitString[33];
 	char expString[9];
 	char manString[24];
@@ -58,7 +68,7 @@ input value: %llu\n", argv[1], input);
 
 
 
-printf("\n1) Input Binary Breakdown\n\
+if (!supressPrint) printf("\n1) Input Binary Breakdown\n\
 ___________________________________________\n\
 |%c       |%s|%s|\n\
 |Negative|Exponent|Mantissa               |\n\
@@ -67,15 +77,15 @@ bitString[0], expString, manString);
 
 
 
-	printf("2) Properties:\n");
+	if (!supressPrint) printf("2) Properties:\n");
 	//check if negative
 	bool isNeg;
 	if (bitString[0] == '1') {
 		isNeg = 1;
-		printf("Negative: True\n");
+		if (!supressPrint) printf("Negative: True\n");
 	} else {
 		isNeg = 0;
-		printf("Negative: False\n");
+		if (!supressPrint) printf("Negative: False\n");
 	}
 
 
@@ -86,7 +96,7 @@ bitString[0], expString, manString);
 	int expMask = 0b01111111100000000000000000000000;
 	long long int unbiasedExp = ((input & expMask)>>23);
 	long long int trueExp = ((input & expMask)>>23) - 127;
-	printf("Exponent: %lld - 127 = %lld\n\n", unbiasedExp, trueExp);
+	if (!supressPrint) printf("Exponent: %lld - 127 = %lld\n\n", unbiasedExp, trueExp);
 
 	/*
 	 * Normalize the string
@@ -94,7 +104,7 @@ bitString[0], expString, manString);
 	 * 128 leading before binary point
 	 * 128 after binary point
 	 */
-	printf("3a) Add Padding\n");
+	if (!supressPrint) printf("3a) Add Padding\n");
 	char leadingManString[258];
 	leadingManString[257] = '\0';
 	for (int i = 0; i < 257; i++) {
@@ -108,7 +118,7 @@ bitString[0], expString, manString);
 		} else {
 			leadingManString[i] = '0';
 		}
-		printf("%c", leadingManString[i]);
+		if (!supressPrint) printf("%c", leadingManString[i]);
 	}
 	
 	/*
@@ -138,7 +148,7 @@ bitString[0], expString, manString);
 		}
 	}
 
-	printf("\n3b) Move Binary Point\n%s\n\n", finalString);
+	if (!supressPrint) printf("\n3b) Move Binary Point\n%s\n\n", finalString);
 
 
 	/*
@@ -168,8 +178,8 @@ bitString[0], expString, manString);
 		}
 	}
 
-	printf("4a) Separate Whole Component\n%s\n", wholeString);
-	printf("4b) Separate Fractional Component\n%s\n", fracString);
+	if (!supressPrint) printf("4a) Separate Whole Component\n%s\n", wholeString);
+	if (!supressPrint) printf("4b) Separate Fractional Component\n%s\n", fracString);
 
 	unsigned long long int wholeNumber;
 	long double fracNumber;
@@ -177,7 +187,7 @@ bitString[0], expString, manString);
 	wholeLength = strlen(wholeString);
 	fracLength = strlen(fracString);
 
-
+	wholeNumber = strtoull(wholeString, NULL, 2);
 	
 	for (int i = 0; i < fracLength; i++) {
 		if (fracString[i] == '1') {
@@ -186,7 +196,13 @@ bitString[0], expString, manString);
 			continue;
 		}
 	}
-	printf("\n5b) Compute Fractional Component \n%.128Lf\n", fracNumber);
 
+	if (!supressPrint) printf("\n5a) Comput Whole Component\n%llu\n", wholeNumber);
+	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128Lf\n", fracNumber);
+	
+
+	long double finalAnswer = (long double)wholeNumber + fracNumber;
+	if (isNeg) finalAnswer *= -1;
+	printf("\nConverted Output:\n%Lf\n", finalAnswer);
 	return 0;
 }
