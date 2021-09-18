@@ -13,6 +13,7 @@ Arguments:
 Options:
 
 `-print`: Print conversion steps
+`-e`: Output as scientific notation
 
 ## Compiling
 Clang:
