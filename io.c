@@ -155,7 +155,7 @@ bitString[0], expString, manString);
 	}
 
 	long long unsigned int binaryPoint = strlen(whole);
-	//printf("Strlen %d\n", binaryPoint);
+	printf("Strlen %llu\n", binaryPoint);
 	isFrac = 0;
 
 	for (int i = 0; i < 23; i++) {
@@ -163,7 +163,7 @@ bitString[0], expString, manString);
 	}
 	frac[23] = '\0';
 
-	//printf("Whole: %s\nFractional: %s\n", whole, frac);
+	printf("Whole: %s\nFractional: %s\n", whole, frac);
 	long long unsigned int fracLen = strlen(frac);
 	long long unsigned int wholeLen = strlen(whole);
 
@@ -174,7 +174,7 @@ bitString[0], expString, manString);
 		}
 	}
 	
-	//printf("fracNum: %lf\n", fracNum);
+	printf("fracNum: %lf\n", fracNum);
 
 	char* ptr;
 	unsigned long long  int wholeInt = 0;
