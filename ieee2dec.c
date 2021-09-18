@@ -180,8 +180,8 @@ bitString[0], expString, manString);
 	if (!supressPrint) printf("4a) Separate Whole Component\n%s\n", wholeString);
 	if (!supressPrint) printf("4b) Separate Fractional Component\n%s\n", fracString);
 
-	unsigned long long int wholeNumber;
-	long double fracNumber;
+	unsigned long long int wholeNumber = 0;
+	long double fracNumber = 0.0;
 	unsigned int wholeLength, fracLength;
 	wholeLength = strlen(wholeString);
 	fracLength = strlen(fracString);
