@@ -37,7 +37,7 @@ input value: %llu\n", argv[1], input);
 
 	/*
 	 * Isolate Negative, Exponent, and Mantissa
-	 */if (!supressPrint) 
+	 */
 	char bitString[33];
 	char expString[9];
 	char manString[24];
@@ -46,8 +46,7 @@ input value: %llu\n", argv[1], input);
 	expString[8] = '\0';
 	manString[23] = '\0';	
 
-	unsigned long long int inputCopy = input;
-	long long unsigned int inCopy = input;
+	unsigned long long int inCopy = input;
 	for (int i = 31; i > -1; i--) {
 		if (inCopy & 1)
 			bitString[i] = '1';
@@ -203,6 +202,6 @@ bitString[0], expString, manString);
 
 	long double finalAnswer = (long double)wholeNumber + fracNumber;
 	if (isNeg) finalAnswer *= -1;
-	printf("\nConverted Output:\n%Lf\n", finalAnswer);
+	printf("\nConverted Output:\n%.24Lf\n", finalAnswer);
 	return 0;
 }
