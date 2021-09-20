@@ -9,7 +9,7 @@ Input: `./ieee2dec 0xc14e0000`
 
 Output: `-30.500000000000000000000000`
 
-Input: `./ieee2dec 1.270000e-005 -e`
+Input: `./ieee2dec 0x37551216 -e`
 
 Output: `1.270000e-005`
 
