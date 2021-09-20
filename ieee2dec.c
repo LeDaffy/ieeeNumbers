@@ -206,14 +206,14 @@ bitString[0], expString, manString);
 
 	if (!supressPrint) printf("\n5a) Comput Whole Component\n%llu\n", wholeNumber);
 	if (!supressPrint) printf("5b) Compute Fractional Component \n%.128lf\n", fracNumber);
-	
+	if (!supressPrint) printf("\nConverted Output: ");
 
 	double finalAnswer = (double)wholeNumber + fracNumber;
 	if (isNeg) finalAnswer *= -1;
 	if (!scientificNotation){
-		printf("\nConverted Output:\n%.24lf\n", finalAnswer);
+		printf("%.24lf", finalAnswer);
 	} else {
-		printf("\nConverted Output:\n%e\n", finalAnswer);
+		printf("%e", finalAnswer);
 	}
 	
 	
