@@ -1,6 +1,6 @@
 # ieeeNumbers
 
-Simple program to convert IEEE floating point numbers to their decimal representation.
+Simple program to convert IEEE floating point numbers to their decimal representation. Options to show steps in order to solve by hand are provided by `-p` and exponent ouptut is provided by `-e`.
 
 ## Usage
 Example
