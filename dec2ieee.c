@@ -20,6 +20,18 @@ int main(int argc, char **argv) {
 	printf("Input (double) = %lf\n", input);	
 	wholePart = (unsigned long long int)floor(input);
 	fracPart = input - wholePart;
+	char wholeString[129];
+	wholeString[128] = '\0';
+	for (int i = 127; i > -1; i--) {
+		if (wholePart & 1 == 1) {
+			wholeString[i] = '1';
+		} else {
+			wholeString[i] = '0';
+		}
+		wholePart >> 1;
+	}
+
+	printf("Whole String = %s\n", wholeString);
 
 	printf("Whole: %llu\nDecimal: %lf\n", wholePart, fracPart);
 	return 0;
