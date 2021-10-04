@@ -15,7 +15,8 @@ Output: `1.270000e-005`
 
 Input: `./ieee2dec 0x37551216 -p`
 
-Output: ```input string: 0037551216
+Output: ```assembly
+input string: 0037551216
 input value: 928322070
 
 1) Input Binary Breakdown
