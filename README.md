@@ -15,7 +15,8 @@ Output: `1.270000e-005`
 
 Input: `./ieee2dec 0x37551216 -p`
 
-Output: ```assembly
+Output:
+```
 input string: 0037551216
 input value: 928322070
 
@@ -44,7 +45,8 @@ Exponent: 110 - 127 = -17
 5b) Compute Fractional Component
 0.00001270000029762741200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
-Converted Output: 0.000012700000297627412000```
+Converted Output: 0.000012700000297627412000
+```
 
 Arguments:
 1. IEEE floating point number reprented as hex with leading 0x or as binary with leading 0b
